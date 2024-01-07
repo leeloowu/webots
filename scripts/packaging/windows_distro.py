@@ -203,9 +203,26 @@ class WindowsWebotsPackage(WebotsPackage):
         if 'INNO_SETUP_HOME' in os.environ:
             INNO_SETUP_HOME = os.getenv('INNO_SETUP_HOME')
         else:
-            INNO_SETUP_HOME = "/C/Program Files (x86)/Inno Setup 6"
+            # INNO_SETUP_HOME = "/C/Program Files (x86)/Inno Setup 6"
+            # INNO_SETUP_HOME = "/C/msys64/home/Leeloo/tools.innosetup/6.2.0/tools"
+            INNO_SETUP_HOME = "C:\\msys64\\home\\Leeloo\\tools.innosetup\\6.2.0\\tools"
+            
         print('creating webots_setup.exe (takes long)\n')
-        subprocess.run([INNO_SETUP_HOME + '/iscc', '-Q', 'webots.iss'])
+        issc_file = INNO_SETUP_HOME + '/iscc.exe'
+        # dest_iss_file = '/C/msys64/home/Leeloo/webots/scripts/packaging/webots.iss'
+        dest_iss_file = "C:\\msys64\\home\\Leeloo\\webots\\scripts\\packaging\\webots.iss"
+        
+        if os.path.exists(issc_file):
+            print(issc_file, " exists")
+        else:
+            print(issc_file, " not exists")
+        if os.path.exists(dest_iss_file):
+            print(dest_iss_file, " exists")
+        else:
+            print(dest_iss_file, " not exists")
+
+        subprocess.run([issc_file, '-Q', dest_iss_file])
+        # subprocess.run([INNO_SETUP_HOME + '/  iscc.exe', '-Q', '/C/msys64/home/Leeloo/webots/scripts/packaging/webots.iss'])
 
         print('Done.')
 

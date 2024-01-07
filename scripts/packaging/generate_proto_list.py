@@ -44,7 +44,9 @@ class ProtoInfo:
         self.needs_robot_ancestor = False
 
         # store file contents to avoid reading it multiple times
-        with open(self.path, 'r') as file:
+        # with open(self.path, 'r') as file:
+        print ("input file:", self.path)
+        with open(self.path, 'r',encoding='UTF-8') as file:
             self.contents = file.read()
             # remove IndexedFaceSet related fields since they significantly slow down the subsequent regex
             self.contents = re.sub(r'point\s+\[[^\]]+\]', '', self.contents)

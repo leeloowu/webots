@@ -14,6 +14,7 @@
 
 ifeq ($(WEBOTS_HOME),)
 WEBOTS_HOME_PATH = ../../..
+VISUAL_STUDIO_PATH = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64"
 else
 null :=
 space := $(null) $(null)
@@ -136,7 +137,7 @@ ifeq ($(VISUAL_STUDIO_PATH),)
 	@$(ECHO) "# \033[0;33m'VISUAL_STUDIO_PATH' not set, skipping Controller.lib\033[0m"
 else
 	@echo "# creating "$@
-	@PATH="$(VISUAL_STUDIO_PATH)/BuildTools/VC/Tools/MSVC/14.16.27023/bin/Hostx64/x64":$PATH lib /machine:X64 /def:Controller.def /out:Controller.lib > /dev/null
+	@PATH="C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\bin\Hostx64\x64":$PATH lib /machine:X64 /def:Controller.def /out:Controller.lib > /dev/null
 	@mv Controller.lib "$(WEBOTS_CONTROLLER_LIB_PATH)"
 	@rm Controller.exp
 endif

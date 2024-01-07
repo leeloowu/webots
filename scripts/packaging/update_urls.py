@@ -35,15 +35,21 @@ def replace_url(file, tag, github, only_extern_proto=False, revert=False):
         url = 'https://raw.githubusercontent.com/cyberbotics/webots/'
     else:
         url = 'https://cdn.jsdelivr.net/gh/cyberbotics/webots@'
-    with open(file, 'r') as fd:
-        content = fd.read()
-    if revert:
-        # revert any tag
-        content = re.sub(pre_condition + url + '[^/]+/', 'webots://', content)
-    else:
-        content = re.sub(pre_condition + 'webots://', url + tag + '/', content)
-    with open(file, 'w', newline='\n') as fd:
-        fd.write(content)
+    
+    
+    try:
+        with open(file, 'r') as fd:
+        #with codecs.open(file, mode='r', encoding='utf-8') as fd:
+            content = fd.read()
+        if revert:
+            # revert any tag
+            content = re.sub(pre_condition + url + '[^/]+/', 'webots://', content)
+        else:
+            content = re.sub(pre_condition + 'webots://', url + tag + '/', content)
+        with open(file, 'w', newline='\n') as fd:
+            fd.write(content)
+    except:
+        print ("input file format error:", file)
 
 
 def replace_projects_urls(tag, revert=False):
